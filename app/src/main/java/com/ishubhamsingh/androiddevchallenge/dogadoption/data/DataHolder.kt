@@ -19,6 +19,7 @@ import java.util.ArrayList
 
 val dogDataList: ArrayList<Dog> = arrayListOf(
     Dog(
+        id = 0,
         name = "Luke",
         age = "2 years",
         gender = "Male",
@@ -30,6 +31,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 1,
         name = "Leia",
         age = "1 year",
         gender = "Female",
@@ -41,6 +43,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 2,
         name = "Han",
         age = "3 years",
         gender = "Male",
@@ -52,6 +55,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 3,
         name = "Anakin",
         age = "4 years",
         gender = "Male",
@@ -63,6 +67,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 4,
         name = "Padme",
         age = "2 years",
         gender = "Female",
@@ -74,6 +79,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 5,
         name = "Yoda",
         age = "1 year",
         gender = "Male",
@@ -85,6 +91,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 6,
         name = "ObiWan",
         age = "2 years",
         gender = "Male",
@@ -96,6 +103,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 7,
         name = "Chewbacca",
         age = "5 years",
         gender = "Male",
@@ -107,6 +115,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 8,
         name = "Scooby Doo",
         age = "4 years",
         gender = "Male",
@@ -118,6 +127,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 9,
         name = "Hachiko",
         age = "3 years",
         gender = "Male",
@@ -129,6 +139,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 10,
         name = "Harry",
         age = "2 years",
         gender = "Male",
@@ -140,6 +151,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 11,
         name = "Ron",
         age = "3 years",
         gender = "Male",
@@ -151,6 +163,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
     ),
 
     Dog(
+        id = 12,
         name = "Hermione",
         age = "4 years",
         gender = "Female",
@@ -161,6 +174,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sollicitudin ac orci phasellus egestas. Id faucibus nisl tincidunt eget nullam non nisi. Duis tristique sollicitudin nibh sit amet. Amet nisl purus in mollis nunc sed id semper. Ac ut consequat semper viverra nam. Venenatis cras sed felis eget velit aliquet sagittis. Augue lacus viverra vitae congue eu. Congue eu consequat ac felis donec et odio pellentesque diam. Mauris pharetra et ultrices neque ornare aenean euismod elementum."
     ),
     Dog(
+        id = 13,
         name = "Hagrid",
         age = "3 years",
         gender = "Male",
@@ -171,6 +185,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sollicitudin ac orci phasellus egestas. Id faucibus nisl tincidunt eget nullam non nisi. Duis tristique sollicitudin nibh sit amet. Amet nisl purus in mollis nunc sed id semper. Ac ut consequat semper viverra nam. Venenatis cras sed felis eget velit aliquet sagittis. Augue lacus viverra vitae congue eu. Congue eu consequat ac felis donec et odio pellentesque diam. Mauris pharetra et ultrices neque ornare aenean euismod elementum."
     ),
     Dog(
+        id = 14,
         name = "Albus",
         age = "5 years",
         gender = "Male",
@@ -181,6 +196,7 @@ val dogDataList: ArrayList<Dog> = arrayListOf(
         description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sollicitudin ac orci phasellus egestas. Id faucibus nisl tincidunt eget nullam non nisi. Duis tristique sollicitudin nibh sit amet. Amet nisl purus in mollis nunc sed id semper. Ac ut consequat semper viverra nam. Venenatis cras sed felis eget velit aliquet sagittis. Augue lacus viverra vitae congue eu. Congue eu consequat ac felis donec et odio pellentesque diam. Mauris pharetra et ultrices neque ornare aenean euismod elementum."
     ),
     Dog(
+        id = 15,
         name = "Severus",
         age = "4 years",
         gender = "Male",

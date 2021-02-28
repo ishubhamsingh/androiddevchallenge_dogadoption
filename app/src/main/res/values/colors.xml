@@ -20,4 +20,5 @@
     <color name="blackish">#FF111111</color>
     <color name="greyBackground">#11090909</color>
     <color name="greyText">#FFB8B0B0</color>
+    <color name="cardBgColor">#FFFFFFFF</color>
 </resources>

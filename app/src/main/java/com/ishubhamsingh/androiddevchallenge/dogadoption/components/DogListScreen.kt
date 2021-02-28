@@ -28,8 +28,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -40,6 +41,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -48,10 +50,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import coil.transform.CircleCropTransformation
 import com.ishubhamsingh.androiddevchallenge.dogadoption.R
 import com.ishubhamsingh.androiddevchallenge.dogadoption.data.Dog
 import com.ishubhamsingh.androiddevchallenge.dogadoption.data.dogDataList
+import com.ishubhamsingh.androiddevchallenge.dogadoption.navigation.Navigation
 import com.ishubhamsingh.androiddevchallenge.dogadoption.ui.theme.greyText
 import com.ishubhamsingh.androiddevchallenge.dogadoption.ui.theme.purple500
 import dev.chrisbanes.accompanist.coil.CoilImage
@@ -101,7 +108,7 @@ fun TopAppBarComponent() {
 }
 
 @Composable
-fun ContentHolder() {
+fun ContentHolder(navController: NavController) {
     Surface(
         color = colorResource(id = R.color.greyBackground),
         shape = RoundedCornerShape(30.dp, 30.dp, 0.dp, 0.dp),
@@ -116,7 +123,7 @@ fun ContentHolder() {
         ) {
             SearchViewComp()
             Spacer(modifier = Modifier.height(16.dp))
-            DogItem(dogDataList.shuffled())
+            DogList(dogDataList, navController)
         }
     }
 }
@@ -137,97 +144,111 @@ fun SearchViewComp() {
 }
 
 @Composable
-fun DogItem(dogList: List<Dog>) {
+fun DogList(dogList: List<Dog>, navController: NavController) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(dogList) { dog ->
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable(
-                    onClick = {
-                        println(dog.name)
-                    }
-                ),
-            ) {
-                Surface(
-                    modifier = Modifier
-                        .height(150.dp)
-                        .width(120.dp),
-                    shape = RoundedCornerShape(20.dp),
-                ) {
-                    CoilImage(
-                        data = dog.imgUrl,
-                        contentDescription = "dog_item_pic",
-                        fadeIn = true,
-                        contentScale = ContentScale.FillBounds,
-                        loading = {
-                            Box(Modifier.matchParentSize()) {
-                                CircularProgressIndicator(Modifier.align(Alignment.Center), color = purple500)
-                            }
-                        }
-                    )
-                }
-                Surface(
-                    modifier = Modifier
-                        .height(120.dp)
-                        .width(230.dp),
-                    shape = RoundedCornerShape(0.dp, 20.dp, 20.dp, 0.dp),
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        Text(
-                            text = dog.name,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            color = purple500,
-                            fontWeight = FontWeight.ExtraBold,
-                            style = MaterialTheme.typography.button
-                        )
-                        Text(
-                            text = dog.gender,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            color = greyText,
-                            fontWeight = FontWeight.Normal,
-                            style = MaterialTheme.typography.caption
-                        )
-                        Text(
-                            text = "${dog.age} old",
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            color = greyText,
-                            fontWeight = FontWeight.Normal,
-                            style = MaterialTheme.typography.caption
-                        )
-
-                        Text(
-                            text = dog.address,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            color = greyText,
-                            fontWeight = FontWeight.Normal,
-                            style = MaterialTheme.typography.caption
-                        )
-                    }
-                }
+        itemsIndexed(dogList) { index, dog ->
+            key(index) {
+                DogItem(dog, navController)
             }
         }
     }
 }
 
 @Composable
-fun DogListScreen() {
+fun DogItem(dog: Dog, navController: NavController) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .clickable(
+                onClick = {
+                    navController.navigate(Navigation.dogDetailRoute(dog.id))
+                }
+            )
+            .padding(top = 4.dp, bottom = 4.dp)
+            .padding(4.dp),
+    ) {
+        Card(
+            modifier = Modifier
+                .height(150.dp)
+                .width(120.dp),
+            backgroundColor = colorResource(id = R.color.cardBgColor),
+            shape = RoundedCornerShape(20.dp),
+            elevation = 4.dp,
+        ) {
+            CoilImage(
+                data = dog.imgUrl,
+                contentDescription = "dog_item_pic",
+                fadeIn = true,
+                contentScale = ContentScale.FillBounds,
+                loading = {
+                    Box(Modifier.matchParentSize()) {
+                        CircularProgressIndicator(Modifier.align(Alignment.Center), color = purple500)
+                    }
+                }
+            )
+        }
+        Card(
+            modifier = Modifier
+                .height(120.dp)
+                .width(230.dp),
+            backgroundColor = colorResource(id = R.color.cardBgColor),
+            shape = RoundedCornerShape(0.dp, 20.dp, 20.dp, 0.dp),
+            elevation = 4.dp,
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(
+                    text = dog.name,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = purple500,
+                    fontWeight = FontWeight.ExtraBold,
+                    style = MaterialTheme.typography.button.copy(fontSize = 16.sp)
+                )
+                Text(
+                    text = dog.gender,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = greyText,
+                    fontWeight = FontWeight.Normal,
+                    style = MaterialTheme.typography.caption.copy(fontSize = 12.sp)
+                )
+                Text(
+                    text = "${dog.age} old",
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = greyText,
+                    fontWeight = FontWeight.Normal,
+                    style = MaterialTheme.typography.caption.copy(fontSize = 12.sp)
+                )
+
+                Text(
+                    text = dog.address,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    color = greyText,
+                    fontWeight = FontWeight.Normal,
+                    style = MaterialTheme.typography.caption.copy(fontSize = 12.sp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun DogListScreen(navController: NavController) {
     Column {
         TopAppBarComponent()
-        ContentHolder()
+        ContentHolder(navController)
     }
 }
 
 @Preview
 @Composable
-fun DogItemPreview() {
-    DogItem(dogDataList.shuffled())
+fun DogListPreview() {
+    DogList(dogDataList, rememberNavController())
 }

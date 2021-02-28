@@ -16,6 +16,7 @@
 package com.ishubhamsingh.androiddevchallenge.dogadoption.data
 
 data class Dog(
+    var id: Int,
     var name: String,
     var age: String,
     var gender: String,
