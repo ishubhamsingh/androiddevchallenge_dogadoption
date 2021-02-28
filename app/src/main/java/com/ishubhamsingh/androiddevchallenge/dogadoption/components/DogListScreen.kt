@@ -1,12 +1,41 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.ishubhamsingh.androiddevchallenge.dogadoption.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Home
@@ -28,7 +57,7 @@ import com.ishubhamsingh.androiddevchallenge.dogadoption.ui.theme.purple500
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
-fun TopAppBarComponent(){
+fun TopAppBarComponent() {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -37,18 +66,21 @@ fun TopAppBarComponent(){
             .padding(8.dp, 0.dp, 8.dp, 0.dp)
     ) {
         IconButton(onClick = { /*TODO*/ }) {
-            Icon(imageVector = Icons.Outlined.Home,
+            Icon(
+                imageVector = Icons.Outlined.Home,
                 contentDescription = "Home",
                 tint = purple500
             )
         }
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "LOCATION",
+            Text(
+                text = "LOCATION",
                 color = greyText,
                 style = MaterialTheme.typography.caption
             )
-            Text(text = "Bengaluru, India",
+            Text(
+                text = "Bengaluru, India",
                 color = purple500,
                 style = MaterialTheme.typography.button
             )
@@ -70,13 +102,15 @@ fun TopAppBarComponent(){
 
 @Composable
 fun ContentHolder() {
-    Surface(color = colorResource(id = R.color.greyBackground),
-        shape = RoundedCornerShape(30.dp,30.dp,0.dp,0.dp),
+    Surface(
+        color = colorResource(id = R.color.greyBackground),
+        shape = RoundedCornerShape(30.dp, 30.dp, 0.dp, 0.dp),
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
     ) {
-        Column(modifier = Modifier.padding(24.dp),
+        Column(
+            modifier = Modifier.padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -107,15 +141,19 @@ fun DogItem(dogList: List<Dog>) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(dogList) {dog->
-            Row(verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable(onClick = {
-                    println(dog.name)
-                }),
+        items(dogList) { dog ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable(
+                    onClick = {
+                        println(dog.name)
+                    }
+                ),
             ) {
-                Surface(modifier = Modifier
-                    .height(150.dp)
-                    .width(120.dp),
+                Surface(
+                    modifier = Modifier
+                        .height(150.dp)
+                        .width(120.dp),
                     shape = RoundedCornerShape(20.dp),
                 ) {
                     CoilImage(
@@ -125,45 +163,54 @@ fun DogItem(dogList: List<Dog>) {
                         contentScale = ContentScale.FillBounds,
                         loading = {
                             Box(Modifier.matchParentSize()) {
-                                CircularProgressIndicator(Modifier.align(Alignment.Center),color = purple500)
+                                CircularProgressIndicator(Modifier.align(Alignment.Center), color = purple500)
                             }
                         }
                     )
                 }
-                Surface(modifier = Modifier
-                    .height(120.dp)
-                    .width(230.dp),
-                    shape = RoundedCornerShape(0.dp,20.dp,20.dp,0.dp),
+                Surface(
+                    modifier = Modifier
+                        .height(120.dp)
+                        .width(230.dp),
+                    shape = RoundedCornerShape(0.dp, 20.dp, 20.dp, 0.dp),
                 ) {
-                    Column(modifier = Modifier.padding(16.dp),
+                    Column(
+                        modifier = Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Text(text = dog.name,
+                        Text(
+                            text = dog.name,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             color = purple500,
                             fontWeight = FontWeight.ExtraBold,
                             style = MaterialTheme.typography.button
                         )
-                        Text(text = dog.gender,
+                        Text(
+                            text = dog.gender,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             color = greyText,
                             fontWeight = FontWeight.Normal,
-                            style = MaterialTheme.typography.caption)
-                        Text(text = "${dog.age} old",
+                            style = MaterialTheme.typography.caption
+                        )
+                        Text(
+                            text = "${dog.age} old",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             color = greyText,
                             fontWeight = FontWeight.Normal,
-                            style = MaterialTheme.typography.caption)
+                            style = MaterialTheme.typography.caption
+                        )
 
-                        Text(text = dog.address,
+                        Text(
+                            text = dog.address,
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             color = greyText,
                             fontWeight = FontWeight.Normal,
-                            style = MaterialTheme.typography.caption)
+                            style = MaterialTheme.typography.caption
+                        )
                     }
                 }
             }
